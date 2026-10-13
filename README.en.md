@@ -25,22 +25,25 @@ The full prompt is in [prompt.md](prompt.md). Paste it verbatim; no extra tool i
 
 ## Scoring
 
-Ten items, one point each. Only "SVG engineering" can be judged automatically; the rest are human judgement, and must be judged **on the rendered image**, not on the model's own description.
+Eleven items, checked one by one, judged **on the rendered image** rather than on the model's own description. The total is a 4-category weighting (5 + 2 + 2 + 1), see [results/SCORES.md](results/SCORES.md).
 
-| # | Item | Passes when |
-| --- | --- | --- |
-| 1 | Tentacle count | Exactly eight, clearly distinguishable |
-| 2 | Object grip | Tentacle-to-portafilter-handle contact is plausible |
-| 3 | Liquid flow | Milk flows continuously into the cup, not into mid-air or outside |
-| 4 | Button interaction | A tentacle actually touches the espresso machine button |
-| 5 | Pointing | A tentacle clearly points at the wall clock |
-| 6 | Cup and scale | The cup sits directly on the digital scale |
-| 7 | Scene support | Machine and scale both rest on the countertop |
-| 8 | Limb connection | The remaining four tentacles are visible and connected to the body |
-| 9 | Spatial relations | Occlusion is consistent, objects do not visibly interpenetrate |
-| 10 | SVG engineering | Valid, self-contained SVG that renders correctly |
+| Item | Passes when |
+| --- | --- |
+| Tentacle count | Exactly eight, clearly distinguishable |
+| Portafilter grip | Tentacle-to-handle contact is plausible |
+| Pitcher grip | The pitcher is held by a tentacle, not floating |
+| Liquid flow | Milk flows continuously into the cup, not into mid-air or outside |
+| Button interaction | A tentacle actually touches the espresso machine button |
+| Pointing | A tentacle clearly points at the wall clock |
+| Cup and scale | The cup sits directly on the digital scale |
+| Scene support | Machine and scale both rest on the countertop |
+| Limb connection | The remaining four tentacles are visible and connected to the body |
+| Spatial relations | Occlusion is consistent, objects do not visibly interpenetrate, and tentacles do not overlap over large areas |
+| SVG engineering | Valid, self-contained SVG that renders correctly |
 
-Item 10 is enforced by CI on every push. Run it locally before submitting (see [CONTRIBUTING.md](CONTRIBUTING.md)):
+Compared with the published run, the checklist splits grip into handle and pitcher, and adds tentacle overlap to spatial relations — exactly the two things the original review penalised.
+
+The last item is enforced by CI on every push. Run it locally before submitting (see [CONTRIBUTING.md](CONTRIBUTING.md)):
 
 ```bash
 node scripts/check-svg.mjs
