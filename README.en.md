@@ -93,7 +93,9 @@ Model **DeepSeek-V4.1-Flash**, five different agent tools, one generation each, 
 | 4 | DeepSeek Harness | [deepseek-harness.svg](results/deepseek-harness.svg) | **8.3** | Main structure complete, but some tentacles overlap and depth is weak |
 | 5 | Claude | [claude.svg](results/claude.svg) | **7.8** | Clean composition, but no clear grip between the milk pitcher and the tentacle |
 
-Blind review (works anonymised A–E, the evaluator did not know the mapping): [results/BLIND.md](results/BLIND.md) — **all five scored 10/10**, so this checklist is saturated on this batch and cannot rank them.
+Blind review (works anonymised A–E, the evaluator did not know the mapping): [results/BLIND.md](results/BLIND.md) — under v1's 10 items **all five scored 10/10**, so that checklist is saturated on this batch and cannot rank them.
+
+Re-scored under v2: [results/RESCORE-v2.md](results/RESCORE-v2.md) — ChatGPT 11, WorkBuddy 10, ZCode 10, Claude 9, DeepSeek Harness 9. **v2 does discriminate**, but its top spot still differs from the published v1 ranking.
 
 Full commentary and per-item evidence: [results/SCORES.md](results/SCORES.md) and [results/EVIDENCE.md](results/EVIDENCE.md).
 Run environment and artefact sizes: [results/MANIFEST.md](results/MANIFEST.md).
@@ -124,6 +126,7 @@ results/MANIFEST.md      Run record: environment, artefact sizes, known gaps
 results/SCORES.md        Scoring basis and per-work commentary
 results/EVIDENCE.md      Per-item evidence and review findings
 results/BLIND.md         Blind review result and rank comparison
+results/RESCORE-v2.md    The same five works re-scored under v2
 scripts/check-svg.mjs    Self-containment check, run by CI and before submitting
 scripts/render.mjs       SVG to PNG, for previews
 scripts/<agent>/         Scripts the agents left behind; reference only
