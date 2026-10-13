@@ -52,22 +52,24 @@
 
 同一款模型 **DeepSeek-V4.1-Flash**，通过 5 个不同的 Agent 工具，使用同一份提示词，各生成一次。
 
-| 排名 | Agent 工具 | 作品 | 得分 | 一句话点评 |
+| 排名 | Agent 工具 | 作品 | 得分 | 扣分项 |
 | --- | --- | --- | --- | --- |
-| 1 | ZCode | [zcode.svg](results/zcode.svg) | **9.5** | 细节丰富，空间结构完整，八条触手职责区分明确 |
-| 2 | ChatGPT | [chatgpt.svg](results/chatgpt.svg) | **9.4** | 画面均衡，前后层次自然，任务完成度高 |
-| 3 | WorkBuddy | [workbuddy.svg](results/workbuddy.svg) | **9.2** | 指令执行优秀，动作关系清楚，但偏示意图风格 |
-| 4 | DeepSeek Harness | [deepseek-harness.svg](results/deepseek-harness.svg) | **8.3** | 主要结构完整，但部分触手交叠，空间层次稍弱 |
-| 5 | Claude | [claude.svg](results/claude.svg) | **7.8** | 构图清爽，但奶壶与触手之间缺少明确的抓握关系 |
+| 1 | ChatGPT | [chatgpt.svg](results/chatgpt.svg) | **10.0** | 无 |
+| 2（并列） | ZCode | [zcode.svg](results/zcode.svg) | **9.5** | 19 触手交叠 |
+| 2（并列） | WorkBuddy | [workbuddy.svg](results/workbuddy.svg) | **9.5** | 12 指向精度 |
+| 2（并列） | DeepSeek Harness | [deepseek-harness.svg](results/deepseek-harness.svg) | **9.5** | 19 触手交叠 |
+| 2（并列） | Claude | [claude.svg](results/claude.svg) | **9.5** | 5 奶壶抓握 |
+
+20 项是平铺的，每项 0.5 分，原评审用来拉开差距的依据各自最多值 0.5 分，所以四份并列。详见 [results/SCORES.md](results/SCORES.md)。
 
 ### 作品预览
 
-| **#1 ZCode · 9.5** | **#2 ChatGPT · 9.4** |
+| **#1 ChatGPT · 10.0** | **#2 ZCode · 9.5** |
 | --- | --- |
-| ![ZCode](results/zcode.webp) | ![ChatGPT](results/chatgpt.webp) |
-| **#3 WorkBuddy · 9.2** | **#4 DeepSeek Harness · 8.3** |
+| ![ChatGPT](results/chatgpt.webp) | ![ZCode](results/zcode.webp) |
+| **#2 WorkBuddy · 9.5** | **#2 DeepSeek Harness · 9.5** |
 | ![WorkBuddy](results/workbuddy.webp) | ![DeepSeek Harness](results/deepseek-harness.webp) |
-| **#5 Claude · 7.8** | |
+| **#2 Claude · 9.5** | |
 | ![Claude](results/claude.webp) | |
 
 完整点评与各分项依据见 [results/SCORES.md](results/SCORES.md)。

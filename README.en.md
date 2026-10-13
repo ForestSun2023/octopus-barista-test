@@ -60,25 +60,27 @@ node scripts/check-svg.mjs
 
 Model **DeepSeek-V4.1-Flash**, five different agent tools, one generation each, same prompt.
 
-| Rank | Agent tool | Work | Score | One-line note |
+| Rank | Agent tool | Work | Score | Deduction |
 | --- | --- | --- | --- | --- |
-| 1 | ZCode | [zcode.svg](results/zcode.svg) | **9.5** | Richest detail, complete spatial structure, eight tentacles clearly differentiated |
-| 2 | ChatGPT | [chatgpt.svg](results/chatgpt.svg) | **9.4** | Balanced composition, natural depth, high task completion |
-| 3 | WorkBuddy | [workbuddy.svg](results/workbuddy.svg) | **9.2** | Excellent instruction following, clear action relationships, but diagram-like |
-| 4 | DeepSeek Harness | [deepseek-harness.svg](results/deepseek-harness.svg) | **8.3** | Main structure complete, but some tentacles overlap and depth is weak |
-| 5 | Claude | [claude.svg](results/claude.svg) | **7.8** | Clean composition, but no clear grip between the milk pitcher and the tentacle |
+| 1 | ChatGPT | [chatgpt.svg](results/chatgpt.svg) | **10.0** | none |
+| 2 (tie) | ZCode | [zcode.svg](results/zcode.svg) | **9.5** | item 19, tentacle overlap |
+| 2 (tie) | WorkBuddy | [workbuddy.svg](results/workbuddy.svg) | **9.5** | item 12, pointing |
+| 2 (tie) | DeepSeek Harness | [deepseek-harness.svg](results/deepseek-harness.svg) | **9.5** | item 19, tentacle overlap |
+| 2 (tie) | Claude | [claude.svg](results/claude.svg) | **9.5** | item 5, pitcher grip |
+
+The 20 items are flat and worth 0.5 each, so the things the original review used to separate these works are worth at most 0.5 apiece — hence the four-way tie. See [results/SCORES.md](results/SCORES.md).
 
 Full commentary: [results/SCORES.md](results/SCORES.md).
 Run environment and artefact sizes: [results/MANIFEST.md](results/MANIFEST.md).
 
 ### Preview
 
-| **#1 ZCode · 9.5** | **#2 ChatGPT · 9.4** |
+| **#1 ChatGPT · 10.0** | **#2 ZCode · 9.5** |
 | --- | --- |
-| ![ZCode](results/zcode.webp) | ![ChatGPT](results/chatgpt.webp) |
-| **#3 WorkBuddy · 9.2** | **#4 DeepSeek Harness · 8.3** |
+| ![ChatGPT](results/chatgpt.webp) | ![ZCode](results/zcode.webp) |
+| **#2 WorkBuddy · 9.5** | **#2 DeepSeek Harness · 9.5** |
 | ![WorkBuddy](results/workbuddy.webp) | ![DeepSeek Harness](results/deepseek-harness.webp) |
-| **#5 Claude · 7.8** | |
+| **#2 Claude · 9.5** | |
 | ![Claude](results/claude.webp) | |
 
 Open [index.html](index.html) in a browser for the gallery — static, no build step, works as-is on GitHub Pages.
