@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>章鱼咖啡师测试 · Octopus Barista Test</title>
+<style>
+  :root {
+    --bg: #f6f3ee; --fg: #241f1a; --muted: #6d635a;
+    --card: #fffdfa; --line: #e2dad0; --accent: #b4622a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16130f; --fg: #f0eae3; --muted: #a1968a; --card: #201b16; --line: #362d25; --accent: #e29a5f; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.65 -apple-system, "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 48px 24px 72px; }
+  h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 28px; font-size: 15px; }
+  .note { border-left: 3px solid var(--accent); padding: 2px 0 2px 14px; color: var(--muted); margin: 0 0 36px; font-size: 15px; }
+  .note b { color: var(--fg); }
+  .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .card header { display: flex; align-items: baseline; gap: 10px; padding: 16px 18px 12px; }
+  .rank { font-size: 13px; font-weight: 700; color: var(--accent); }
+  .name { font-weight: 600; font-size: 17px; }
+  .score { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 700; font-size: 17px; }
+  .card img { display: block; width: 100%; height: 260px; object-fit: contain; background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .card p { margin: 12px 18px 0; color: var(--muted); font-size: 14px; }
+  .card footer { padding: 12px 18px 16px; margin-top: auto; font-size: 13px; }
+  a { color: var(--accent); }
+  footer.page { margin-top: 44px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>章鱼咖啡师测试</h1>
+  <p class="sub">Octopus Barista Test · 同一款模型（DeepSeek-V4.1-Flash），同一份提示词，5 个不同的 Agent 工具，各生成一次。</p>
+
+  <p class="note">
+    <b>画八条触手并不难</b>，难的是让每条触手完成不同的任务，同时保证整幅图在空间关系上说得通。
+    评分不因为画得漂亮就给高分——画面精美但只有六条触手、牛奶流在杯子外面，照样扣分。
+  </p>
+
+  <div class="grid">
+    <article class="card">
+      <header><span class="rank">#1</span><span class="name">ZCode</span><span class="score">9.5</span></header>
+      <img src="results/zcode.svg" alt="ZCode 生成的章鱼咖啡师 SVG">
+      <p>细节丰富，空间结构完整，八条触手职责区分明确。</p>
+      <footer><a href="results/zcode.svg">查看 SVG 源码</a></footer>
+    </article>
+
+    <article class="card">
+      <header><span class="rank">#2</span><span class="name">ChatGPT</span><span class="score">9.4</span></header>
+      <img src="results/chatgpt.svg" alt="ChatGPT 生成的章鱼咖啡师 SVG">
+      <p>画面均衡，前后层次自然，任务完成度高。</p>
+      <footer><a href="results/chatgpt.svg">查看 SVG 源码</a></footer>
+    </article>
+
+    <article class="card">
+      <header><span class="rank">#3</span><span class="name">WorkBuddy</span><span class="score">9.2</span></header>
+      <img src="results/workbuddy.svg" alt="WorkBuddy 生成的章鱼咖啡师 SVG">
+      <p>指令执行优秀，动作关系清楚，但偏示意图风格。</p>
+      <footer><a href="results/workbuddy.svg">查看 SVG 源码</a></footer>
+    </article>
+
+    <article class="card">
+      <header><span class="rank">#4</span><span class="name">DeepSeek Harness</span><span class="score">8.3</span></header>
+      <img src="results/deepseek-harness.svg" alt="DeepSeek Harness 生成的章鱼咖啡师 SVG">
+      <p>主要结构完整，但部分触手交叠，空间层次稍弱。</p>
+      <footer><a href="results/deepseek-harness.svg">查看 SVG 源码</a></footer>
+    </article>
+
+    <article class="card">
+      <header><span class="rank">#5</span><span class="name">Claude</span><span class="score">7.8</span></header>
+      <img src="results/claude.svg" alt="Claude 生成的章鱼咖啡师 SVG">
+      <p>构图清爽，但奶壶与触手之间缺少明确的抓握关系。</p>
+      <footer><a href="results/claude.svg">查看 SVG 源码</a></footer>
+    </article>
+  </div>
+
+  <footer class="page">
+    完整评分依据见 <a href="results/SCORES.md">results/SCORES.md</a> ·
+    测试提示词见 <a href="prompt.md">prompt.md</a> ·
+    一次结果不能代表 Agent 或模型的整体水平。
+  </footer>
+</div>
+</body>
+</html>
