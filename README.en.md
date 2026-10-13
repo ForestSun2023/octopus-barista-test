@@ -25,6 +25,8 @@ The full prompt is in [prompt.md](prompt.md). Paste it verbatim; no extra tool i
 
 ## Scoring (20 items, 0.5 points each, 10 points total)
 
+All 20 items are **equally weighted**. Weighting them would mean everyone argues about the weights rather than about the work; equal weight keeps any dispute focused on whether a specific item was judged correctly.
+
 | # | 检查项 | 通过标准 |
 | --- | --- | --- |
 | 1 | Tentacle count | Exactly eight |
@@ -68,7 +70,7 @@ Model **DeepSeek-V4.1-Flash**, five different agent tools, one generation each, 
 | 2 (tie) | DeepSeek Harness | [deepseek-harness.svg](results/deepseek-harness.svg) | **9.5** | item 19, tentacle overlap |
 | 2 (tie) | Claude | [claude.svg](results/claude.svg) | **9.5** | item 5, pitcher grip |
 
-The 20 items are flat and worth 0.5 each, so the things the original review used to separate these works are worth at most 0.5 apiece — hence the four-way tie. See [results/SCORES.md](results/SCORES.md).
+Every item carries equal weight, so the things the original review used to separate these works (a floating pitcher, tentacle overlap, detail density) are worth at most 0.5 each — the four land in the same band. The tie is the normal outcome of this scheme, not a missed deduction: if you disagree, point at the item that was judged wrongly. See [results/SCORES.md](results/SCORES.md).
 
 Full commentary: [results/SCORES.md](results/SCORES.md).
 Run environment and artefact sizes: [results/MANIFEST.md](results/MANIFEST.md).
