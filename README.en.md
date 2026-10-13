@@ -23,20 +23,30 @@ Drawing eight tentacles is not the hard part. The hard part is **giving every te
 
 The full prompt is in [prompt.md](prompt.md). Paste it verbatim; no extra tool instructions are needed.
 
-## Scoring (10 points, 1 point each)
+## Scoring (20 items, 0.5 points each, 10 points total)
 
-| Item | Passes when |
-| --- | --- |
-| Tentacle count | Exactly eight, clearly distinguishable |
-| Object grip | Tentacle-to-handle and tentacle-to-pitcher contact is plausible; the pitcher is not floating |
-| Liquid flow | Milk flows continuously into the cup, not into mid-air or outside |
-| Button interaction | A tentacle actually touches the espresso machine button |
-| Pointing | A tentacle clearly points at the wall clock |
-| Cup and scale | The cup sits directly on the digital scale |
-| Scene support | Machine and scale both rest on the countertop |
-| Limb connection | The remaining four tentacles are visible and connected to the body |
-| Spatial relations | Occlusion is consistent, objects do not visibly interpenetrate, and tentacles do not overlap over large areas |
-| SVG engineering | Valid, self-contained SVG that renders correctly |
+| # | 检查项 | 通过标准 |
+| --- | --- | --- |
+| 1 | Tentacle count | Exactly eight |
+| 2 | Tentacle separation | All eight are distinguishable; none merged or duplicated |
+| 3 | Handle grip | One tentacle touches the portafilter handle |
+| 4 | Handle position | The handle sits under the machine's group head, in a plausible position |
+| 5 | Pitcher grip | The pitcher is held by a tentacle, not floating |
+| 6 | Pitcher pose | The pitcher's tilt is consistent with pouring |
+| 7 | Stream continuity | The milk stream is not broken |
+| 8 | Stream endpoint | The stream ends inside the cup rim, not outside |
+| 9 | Button exists | The espresso machine has a recognisable button |
+| 10 | Button touch | One tentacle actually touches the button |
+| 11 | Pointing action | One tentacle is extended toward the wall clock |
+| 12 | Pointing accuracy | That tentacle's extended axis points at the clock face; no dashed line or arrow stands in for it |
+| 13 | Cup and scale present | Both the coffee cup and the digital scale are present and recognisable |
+| 14 | Cup on scale | The cup rests directly on the scale, surfaces in contact |
+| 15 | Scene support | Machine and scale both rest on the countertop |
+| 16 | Remaining limbs | The remaining four tentacles are clearly visible |
+| 17 | Limb connection | Every tentacle is connected to the body, none enters from off-screen |
+| 18 | Occlusion | Occlusion is consistent; objects do not visibly interpenetrate |
+| 19 | Tentacle overlap | Tentacles do not overlap each other over large areas |
+| 20 | SVG engineering | Valid, self-contained SVG that renders correctly |
 
 The last item is enforced by CI on every push. Run it locally before submitting (see [CONTRIBUTING.md](CONTRIBUTING.md)):
 

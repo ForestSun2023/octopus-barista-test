@@ -16,7 +16,7 @@
 node scripts/check-svg.mjs results/your-agent.svg
 ```
 
-必须输出 `OK`。这一项对应评分表里「代码质量」的 1 分，过不了就不必提。CI 会在 push 时跑同一份检查。
+必须输出 `OK`。这一项对应评分表里「代码质量」的 0.5 分，过不了就不必提。CI 会在 push 时跑同一份检查。
 
 ## 预览图怎么来
 
