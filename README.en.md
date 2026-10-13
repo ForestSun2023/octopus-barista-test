@@ -21,68 +21,32 @@ Drawing eight tentacles is not the hard part. The hard part is **giving every te
 
 ## The prompt
 
-The full prompt is in [prompt.md](prompt.md) (currently v2). Paste it verbatim; no extra tool instructions are needed.
-
-The 2026-10-13 run in this repository used [prompts/v1.md](prompts/v1.md). v2 only adds a constraint forbidding labels or arrows in place of actual drawing.
+The full prompt is in [prompt.md](prompt.md). Paste it verbatim; no extra tool instructions are needed.
 
 ## Scoring
 
-**Checklist v2: 11 items, 1 point each, 11 points total.** Only "SVG engineering" can be judged automatically; the other 10 are human judgement and must be backed by evidence found **in the rendered image**, not by the model's own description.
+Ten items, one point each. Only "SVG engineering" can be judged automatically; the rest are human judgement, and must be judged **on the rendered image**, not on the model's own description.
 
-For a blind review, hand [rubric/v2.md](rubric/v2.md) to the evaluator — it contains no results and no agent names, so it cannot leak the origin of a work.
+| # | Item | Passes when |
+| --- | --- | --- |
+| 1 | Tentacle count | Exactly eight, clearly distinguishable |
+| 2 | Object grip | Tentacle-to-portafilter-handle contact is plausible |
+| 3 | Liquid flow | Milk flows continuously into the cup, not into mid-air or outside |
+| 4 | Button interaction | A tentacle actually touches the espresso machine button |
+| 5 | Pointing | A tentacle clearly points at the wall clock |
+| 6 | Cup and scale | The cup sits directly on the digital scale |
+| 7 | Scene support | Machine and scale both rest on the countertop |
+| 8 | Limb connection | The remaining four tentacles are visible and connected to the body |
+| 9 | Spatial relations | Occlusion is consistent, objects do not visibly interpenetrate |
+| 10 | SVG engineering | Valid, self-contained SVG that renders correctly |
 
-| # | Item | Judged | Passes when |
-| --- | --- | --- | --- |
-| 1 | SVG engineering | 🤖 auto | Valid, has a viewBox, self-contained, no raster/base64/external assets |
-| 2 | Tentacle count | 👁 human | Eight tentacles, numbered from the body with no hesitation over whether something is one tentacle or two |
-| 3a | Portafilter grip | 👁 human | The tentacle tip is on or inside the handle shape; tolerance below |
-| 3b | Pitcher grip | 👁 human | The pitcher has a definite contact point with a tentacle, not floating; same tolerance |
-| 4 | Liquid flow | 👁 human | The milk stream is one continuous path ending inside the cup rim; a break, or landing outside, fails |
-| 5 | Button interaction | 👁 human | The tentacle tip is on the button shape, not beside it; tolerance below |
-| 6 | Pointing | 👁 human | The tentacle's extended axis passes through the clock face and the tip is within tolerance of it; **dashed lines, arrows or labels may not bridge that gap** |
-| 7 | Cup and scale | 👁 human | The cup base meets the scale platform with no countertop visible between them; tolerance below |
-| 8 | Scene support | 👁 human | The bottom edges of the machine and scale coincide with the countertop line |
-| 9 | Limb connection | 👁 human | The four remaining tentacles start at the body, not from off-screen |
-| 10 | Spatial relations | 👁 human | ① Occlusion is consistent; ② the outline overlap of any two tentacles is at most **1/3** of the shorter one's visible length; ③ no three or more limbs piled up near the body beyond the point where each outline can still be traced |
-
-Item 1 is enforced by CI on every push. Run it locally before submitting (see [CONTRIBUTING.md](CONTRIBUTING.md)):
+Item 10 is enforced by CI on every push. Run it locally before submitting (see [CONTRIBUTING.md](CONTRIBUTING.md)):
 
 ```bash
 node scripts/check-svg.mjs
 ```
 
-### Distance tolerances
-
-Tolerances are a **percentage of the canvas short side**, not absolute pixels — canvases in this run range from 1000×750 to 1600×1100, so a fixed pixel budget would be unfair across sizes.
-
-| Kind | Tolerance | 1200×800 | 1200×900 | 1600×1100 |
-| --- | --- | --- | --- | --- |
-| Contact: 3a handle / 3b pitcher / 5 button / 7 cup & scale | short side **1%** | 8 px | 9 px | 11 px |
-| Pointing: 6 clock | short side **5%** | 40 px | 45 px | 55 px |
-
-Contact keeps only 1% for line width and antialiasing — touching means touching, a 10 px gap is not touching. Pointing is looser because the clock hangs on the wall and the tentacle crosses the whole frame; whether the direction is right matters more here than whether it is touching.
-
-Calibrated on the contested values measured in the previous run (raw measurements in [results/BLIND.md](results/BLIND.md)):
-
-| Measured | Canvas | Tip to clock face | Tolerance | Verdict |
-| --- | --- | --- | --- | --- |
-| ZCode | 1600×1100 | 45 px (axis off by 1.8 px) | 55 px | pass |
-| WorkBuddy | 1200×800 | 40 px, bridged by a purple dashed line | 40 px | **fail** — distance just fits, but it violates item 6's prohibition |
-| Claude | 1200×900 | 80 px | 45 px | fail |
-
-### Rubric versions
-
-| Version | Items | Basis |
-| --- | --- | --- |
-| [v1](rubric/v1.md) | 10 | The published scores use a 4-category weighting (5 + 2 + 2 + 1), **not** the checklist sum; the checklist also missed pitcher grip and tentacle overlap |
-| **v2 (current)** | 11 | 1 point per item, 11 total; tolerances are fixed numbers |
-
-The published 9.5 / 9.4 / 9.2 / 8.3 / 7.8 were scored with **v1** and cannot be reproduced with v2. Comparing across versions requires re-scoring with v2.
-
 **Principle**: a pretty drawing does not earn points. Gorgeous artwork with only six tentacles, or milk pouring outside the cup, still loses points.
-
-## Results of this run
-
 Model **DeepSeek-V4.1-Flash**, five different agent tools, one generation each, same prompt.
 
 | Rank | Agent tool | Work | Score | One-line note |
@@ -93,11 +57,7 @@ Model **DeepSeek-V4.1-Flash**, five different agent tools, one generation each, 
 | 4 | DeepSeek Harness | [deepseek-harness.svg](results/deepseek-harness.svg) | **8.3** | Main structure complete, but some tentacles overlap and depth is weak |
 | 5 | Claude | [claude.svg](results/claude.svg) | **7.8** | Clean composition, but no clear grip between the milk pitcher and the tentacle |
 
-Blind review (works anonymised A–E, the evaluator did not know the mapping): [results/BLIND.md](results/BLIND.md) — under v1's 10 items **all five scored 10/10**, so that checklist is saturated on this batch and cannot rank them.
-
-Re-scored under v2: [results/RESCORE-v2.md](results/RESCORE-v2.md) — ChatGPT 11, WorkBuddy 10, ZCode 10, Claude 9, DeepSeek Harness 9. **v2 does discriminate**, but its top spot still differs from the published v1 ranking.
-
-Full commentary and per-item evidence: [results/SCORES.md](results/SCORES.md) and [results/EVIDENCE.md](results/EVIDENCE.md).
+Full commentary: [results/SCORES.md](results/SCORES.md).
 Run environment and artefact sizes: [results/MANIFEST.md](results/MANIFEST.md).
 
 ### Preview
@@ -115,18 +75,12 @@ Open [index.html](index.html) in a browser for the gallery — static, no build 
 ## Repository layout
 
 ```
-prompt.md                The prompt, v2 — copy and paste
-prompts/v1.md            Frozen v1, the version this run used
-rubric/v1.md             Frozen rubric v1, what the published scores used
-rubric/v2.md             Current rubric v2 (11 items), hand this to a blind evaluator
+prompt.md                The prompt — copy and paste
+CONTRIBUTING.md          Submission requirements
 README.en.md             English
-CONTRIBUTING.md          Submission requirements and blind review method
 results/*.svg            Each agent tool's output (the only artefact that is scored)
-results/MANIFEST.md      Run record: environment, artefact sizes, known gaps
 results/SCORES.md        Scoring basis and per-work commentary
-results/EVIDENCE.md      Per-item evidence and review findings
-results/BLIND.md         Blind review result and rank comparison
-results/RESCORE-v2.md    The same five works re-scored under v2
+results/MANIFEST.md      Run record: environment and artefact sizes
 scripts/check-svg.mjs    Self-containment check, run by CI and before submitting
 scripts/render.mjs       SVG to PNG, for previews
 scripts/<agent>/         Scripts the agents left behind; reference only

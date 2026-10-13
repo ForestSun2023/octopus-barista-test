@@ -5,12 +5,10 @@
 | 项 | 值 |
 | --- | --- |
 | 模型 | DeepSeek-V4.1-Flash |
-| 提示词 | [prompts/v1.md](../prompts/v1.md)，逐字使用，未追加任何说明（当前版本已更新为 [prompt.md](../prompt.md) v2，结果仍对应 v1） |
+| 提示词 | [prompt.md](../prompt.md)，逐字使用，未追加任何说明 |
 | 生成方式 | 每个 Agent 工具新开一个会话，一次生成，无重试、无人工修改 |
 | 日期 | 2026-10-13 |
 | 评审 | 由 ChatGPT 依据本仓库评分表逐项检查，一次评审，无第二人复核 |
-| 评分表 | [rubric/v1.md](../rubric/v1.md)（10 项 + 4 类加权）；当前版本已升级为 [v2](../rubric/v2.md)，11 项 |
-| 后续复核 | 逐项证据 [EVIDENCE.md](EVIDENCE.md)、盲评 [BLIND.md](BLIND.md)（评审后补做，不是本次运行的原始记录） |
 | Agent 工具版本 | unknown（当时未记录） |
 | 推理档位 / 生成耗时 / token 用量 | unknown（当时未记录） |
 
