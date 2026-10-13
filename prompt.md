@@ -1,6 +1,8 @@
 # 测试提示词 / Test Prompt
 
 > 整段复制，直接发给 Agent。不要附加任何额外说明。
+>
+> **当前版本 v2。** 本仓库收录的 2026-10-13 轮次用的是 [v1](prompts/v1.md)，两者只差最后一条禁止项。
 
 ```text
 Create a self-contained SVG illustration of an octopus working as a barista in a coffee shop. The illustration must satisfy ALL of these constraints:
@@ -19,6 +21,7 @@ Output valid, self-contained SVG code with a viewBox.
 Use SVG vector elements only, without raster images, external assets, or embedded base64 images.
 Do not omit any constraint to simplify the drawing.
 Prioritize structural correctness and spatial relationships over decorative detail.
+Do not use a text label, arrow, leader line, or dashed guide as a substitute for drawing the object, action or relationship itself. An annotation may only accompany something that is already drawn.
 Return the complete SVG code only.
 ```
 
@@ -37,4 +40,14 @@ Return the complete SVG code only.
 | 9 | 前四分之三视角，边界清晰、遮挡合理、比例一致 |
 | 10 | 输出合法、自包含、带 viewBox 的 SVG，只用矢量元素，不含位图或外部资源 |
 | 11 | 不得为简化画面而省略任何约束；结构正确优先于装饰细节 |
-| 12 | 只返回完整 SVG 代码 |
+| 12 | 不得用文字标注、箭头、引线或虚线指示代替物体本身的绘制；标注只能伴陪已经画出来的东西 |
+| 13 | 只返回完整 SVG 代码 |
+
+## 版本
+
+| 版本 | 与上一版的差异 | 用于 |
+| --- | --- | --- |
+| [v1](prompts/v1.md) | — | 2026-10-13 的 5 个 Agent 结果 |
+| **v2（当前）** | 增加第 12 条：禁止用标注代替绘图 | — |
+
+第 12 条针对的是「用示意图代替画」这类取巧：画一条虚线箭头指向一个方块，说这是挂钟，比真的把触手画过去要省事得多。原版提示词里没有明文禁止，评分表却已经在扣这种分——规则和判分标准不一致，v2 把规则补上。

@@ -1,5 +1,7 @@
 # 章鱼咖啡师测试 · Octopus Barista Test
 
+[中文](README.md) · [English](README.en.md)
+
 一个单提示词测试，用来观察 AI 编码 Agent 的**空间推理、多约束执行和代码生成**能力。灵感来自鹈鹕测试（Pelican Test：让模型画一只骑自行车的鹈鹕）。
 
 > 同一款模型、同一份提示词，换不同的 Agent 工具，看谁真的把八条触手的活都干完了。
@@ -19,9 +21,25 @@
 
 ## 测试指令
 
-完整提示词见 [prompt.md](prompt.md)。直接整段复制粘贴给 Agent 即可，不需要任何额外工具说明。
+完整提示词见 [prompt.md](prompt.md)（当前 v2）。直接整段复制粘贴给 Agent 即可，不需要任何额外工具说明。
 
-## 评分标准（10 分制，每项 1 分）
+本仓库收录的 2026-10-13 轮次用的是 [prompts/v1.md](prompts/v1.md)，v2 只多了一条禁止用标注代替绘图的约束。
+
+## 评分标准
+
+分两步：先按下表的 **4 类加权**算总分，再用 **10 项检查清单**逐项找证据。
+
+| 评分项目 | 满分 | 覆盖的检查项 |
+| --- | --- | --- |
+| 指令完成度 | 5 | 八条触手、四项指定动作、其余肢体是否齐全 |
+| 空间与交互关系 | 2 | 抓握、倒奶、按钮接触、杯子和秤的关系 |
+| 构图与视觉表达 | 2 | 遮挡、透视、比例、可辨识度及细节 |
+| SVG 工程质量 | 1 | XML 有效性、自包含性、能否正常渲染 |
+
+> 总分不是 10 项直接相加——二值检查只能出整数，而本轮的 9.5 / 8.3 / 7.8 来自上面的加权。
+> 清单和加权口径不一致的地方、以及清单漏掉的判据，都记在 [results/EVIDENCE.md](results/EVIDENCE.md)。
+
+### 10 项检查清单
 
 10 项里只有「代码质量」能自动判定，其余 9 项靠人工。人工项也要对着**渲染出来的图**找证据，不接受模型的文字说明。
 
@@ -62,6 +80,8 @@ node scripts/check-svg.mjs
 
 **判分原则**：不因为画得漂亮就给高分。画面精美但只有六条触手、牛奶流在杯子外面，照样扣分。
 
+本轮逐项复核的证据和两处口径问题见 [results/EVIDENCE.md](results/EVIDENCE.md)。
+
 ## 本轮结果
 
 同一款模型 **DeepSeek-V4.1-Flash**，通过 5 个不同的 Agent 工具，使用同一份提示词，各生成一次。
@@ -91,12 +111,16 @@ node scripts/check-svg.mjs
 ## 仓库结构
 
 ```
-prompt.md                测试提示词，复制即用
-CONTRIBUTING.md          投稿要求
+prompt.md                测试提示词 v2，复制即用
+prompts/v1.md            冻结的 v1，本轮结果用的就是它
+README.en.md             English
+CONTRIBUTING.md          投稿要求与盲评复核方法
 results/*.svg            各 Agent 的最终作品（也是唯一被评分的产物）
 results/MANIFEST.md      运行记录：环境、产物规模、已知缺口
 results/SCORES.md        本轮评分依据与逐份点评
+results/EVIDENCE.md      逐项判定证据与复核发现
 scripts/check-svg.mjs    自包含性校验，CI 与投稿前都跑它
+scripts/render.mjs       SVG 渲染成 PNG，做预览图用
 scripts/<agent>/         各 Agent 生成作品时留下的脚本，仅供参考
 index.html               作品画廊
 ```
