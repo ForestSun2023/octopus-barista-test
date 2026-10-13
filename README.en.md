@@ -23,15 +23,12 @@ Drawing eight tentacles is not the hard part. The hard part is **giving every te
 
 The full prompt is in [prompt.md](prompt.md). Paste it verbatim; no extra tool instructions are needed.
 
-## Scoring
-
-Eleven items, checked one by one, judged **on the rendered image** rather than on the model's own description. The total is a 4-category weighting (5 + 2 + 2 + 1), see [results/SCORES.md](results/SCORES.md).
+## Scoring (10 points, 1 point each)
 
 | Item | Passes when |
 | --- | --- |
 | Tentacle count | Exactly eight, clearly distinguishable |
-| Portafilter grip | Tentacle-to-handle contact is plausible |
-| Pitcher grip | The pitcher is held by a tentacle, not floating |
+| Object grip | Tentacle-to-handle and tentacle-to-pitcher contact is plausible; the pitcher is not floating |
 | Liquid flow | Milk flows continuously into the cup, not into mid-air or outside |
 | Button interaction | A tentacle actually touches the espresso machine button |
 | Pointing | A tentacle clearly points at the wall clock |
@@ -41,8 +38,6 @@ Eleven items, checked one by one, judged **on the rendered image** rather than o
 | Spatial relations | Occlusion is consistent, objects do not visibly interpenetrate, and tentacles do not overlap over large areas |
 | SVG engineering | Valid, self-contained SVG that renders correctly |
 
-Compared with the published run, the checklist splits grip into handle and pitcher, and adds tentacle overlap to spatial relations — exactly the two things the original review penalised.
-
 The last item is enforced by CI on every push. Run it locally before submitting (see [CONTRIBUTING.md](CONTRIBUTING.md)):
 
 ```bash
@@ -50,6 +45,9 @@ node scripts/check-svg.mjs
 ```
 
 **Principle**: a pretty drawing does not earn points. Gorgeous artwork with only six tentacles, or milk pouring outside the cup, still loses points.
+
+## Results of this run
+
 Model **DeepSeek-V4.1-Flash**, five different agent tools, one generation each, same prompt.
 
 | Rank | Agent tool | Work | Score | One-line note |
