@@ -44,7 +44,7 @@ python -c "from PIL import Image; Image.open('results/your-agent.png').convert('
 
 ## 评分
 
-见 [README.md 的评分标准](README.md#评分标准)。**先看结构，再看美观**。人工项要对着渲染出来的图找证据，不接受模型的文字说明。
+见 [rubric/v2.md](rubric/v2.md)：11 项，每项 1 分，满分 11，含写死的距离阈值。**先看结构，再看美观**。人工项要对着渲染出来的图找证据，不接受模型的文字说明。
 
 ## 盲评复核
 
@@ -52,7 +52,7 @@ python -c "from PIL import Image; Image.open('results/your-agent.png').convert('
 
 1. 把 `results/*.svg` 复制到一个**仓库之外**的目录，重命名成 `A.svg` `B.svg` `C.svg`…，顺序随机
 2. 把映射关系写在**另一个文件**里，不要放进作品目录
-3. 把作品目录和评分表交给一个不知道映射的评审者（另一个模型，或者人），要求按同一张表逐项打分
+3. 把作品目录和 [rubric/v2.md](rubric/v2.md) 交给一个不知道映射的评审者（另一个模型，或者人），要求它按那张表逐项打分。rubric 里没有结果也没有 Agent 名称，可以安全交出去
 4. 拿盲评结果和已发布分数对比；排名差得多，说明原评分不可靠
 
 两条硬要求：评审者必须真的把 SVG 渲染出来看；作品目录里不能有任何能泄露来源的元数据。

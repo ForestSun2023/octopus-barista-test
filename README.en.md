@@ -27,34 +27,23 @@ The 2026-10-13 run in this repository used [prompts/v1.md](prompts/v1.md). v2 on
 
 ## Scoring
 
-Two steps: compute the total from the **four weighted categories** below, then verify item by item against the **10-point checklist**.
+**Checklist v2: 11 items, 1 point each, 11 points total.** Only "SVG engineering" can be judged automatically; the other 10 are human judgement and must be backed by evidence found **in the rendered image**, not by the model's own description.
 
-| Category | Max | Covers |
-| --- | --- | --- |
-| Instruction completion | 5 | Eight tentacles, the four specified actions, remaining limbs present |
-| Space and interaction | 2 | Grips, pouring, button contact, cup and scale relationships |
-| Composition and visual expression | 2 | Occlusion, perspective, proportion, legibility, detail |
-| SVG engineering | 1 | Valid XML, self-contained, renders correctly |
-
-> The total is *not* the sum of the 10 checklist items — a binary checklist can only produce integers, while this run's 9.5 / 8.3 / 7.8 come from the weighting above.
-> Where the checklist and the weighting disagree, and which criteria the checklist is missing, are documented in [results/EVIDENCE.md](results/EVIDENCE.md).
-
-### The 10-point checklist
-
-Only "SVG engineering" can be judged automatically; the other nine are human judgement. Human items must be backed by evidence found **in the rendered image**, not by the model's own description.
+For a blind review, hand [rubric/v2.md](rubric/v2.md) to the evaluator — it contains no results and no agent names, so it cannot leak the origin of a work.
 
 | # | Item | Judged | Passes when |
 | --- | --- | --- | --- |
 | 1 | SVG engineering | 🤖 auto | Valid, has a viewBox, self-contained, no raster/base64/external assets |
-| 2 | Tentacle count | 👁 human | Exactly eight, clearly distinguishable |
-| 3 | Object grip | 👁 human | Tentacle-to-portafilter-handle contact is plausible |
-| 4 | Liquid flow | 👁 human | Milk flows continuously into the cup, not into mid-air or outside |
-| 5 | Button interaction | 👁 human | A tentacle actually touches the espresso machine button |
-| 6 | Pointing | 👁 human | A tentacle clearly points at the wall clock |
-| 7 | Cup and scale | 👁 human | The cup sits directly on the digital scale |
-| 8 | Scene support | 👁 human | Machine and scale both rest on the countertop |
-| 9 | Limb connection | 👁 human | The remaining four tentacles are visible and connected to the body |
-| 10 | Spatial relations | 👁 human | Occlusion is consistent, objects do not visibly interpenetrate |
+| 2 | Tentacle count | 👁 human | Eight tentacles, numbered from the body with no hesitation over whether something is one tentacle or two |
+| 3a | Portafilter grip | 👁 human | The tentacle tip is on or inside the handle shape; tolerance below |
+| 3b | Pitcher grip | 👁 human | The pitcher has a definite contact point with a tentacle, not floating; same tolerance |
+| 4 | Liquid flow | 👁 human | The milk stream is one continuous path ending inside the cup rim; a break, or landing outside, fails |
+| 5 | Button interaction | 👁 human | The tentacle tip is on the button shape, not beside it; tolerance below |
+| 6 | Pointing | 👁 human | The tentacle's extended axis passes through the clock face and the tip is within tolerance of it; **dashed lines, arrows or labels may not bridge that gap** |
+| 7 | Cup and scale | 👁 human | The cup base meets the scale platform with no countertop visible between them; tolerance below |
+| 8 | Scene support | 👁 human | The bottom edges of the machine and scale coincide with the countertop line |
+| 9 | Limb connection | 👁 human | The four remaining tentacles start at the body, not from off-screen |
+| 10 | Spatial relations | 👁 human | ① Occlusion is consistent; ② the outline overlap of any two tentacles is at most **1/3** of the shorter one's visible length; ③ no three or more limbs piled up near the body beyond the point where each outline can still be traced |
 
 Item 1 is enforced by CI on every push. Run it locally before submitting (see [CONTRIBUTING.md](CONTRIBUTING.md)):
 
@@ -62,21 +51,33 @@ Item 1 is enforced by CI on every push. Run it locally before submitting (see [C
 node scripts/check-svg.mjs
 ```
 
-### Evidence rules for the human items
+### Distance tolerances
 
-All nine must be checked against the rendered image. "Looks about right" does not count:
+Tolerances are a **percentage of the canvas short side**, not absolute pixels — canvases in this run range from 1000×750 to 1600×1100, so a fixed pixel budget would be unfair across sizes.
 
-| Item | Passes when |
-| --- | --- |
-| Tentacle count | You can number all 8 tentacles starting from the body without ever hesitating over whether something is one tentacle or two |
-| Object grip | The handle shape and the tentacle tip are touching; "near" does not count |
-| Liquid flow | The milk stream is one continuous path ending inside the cup rim; a break, or landing outside the cup, fails |
-| Button interaction | The tentacle tip is on the button shape, not beside it |
-| Pointing | The tentacle's axis extended passes through the clock face |
-| Cup and scale | The cup base meets the scale platform with no countertop visible between them |
-| Scene support | The bottom edges of the machine and scale coincide with the countertop line |
-| Limb connection | The four remaining tentacles start at the body, not from off-screen |
-| Spatial relations | Occlusion is consistent: one tentacle cannot be both in front of and behind the machine |
+| Kind | Tolerance | 1200×800 | 1200×900 | 1600×1100 |
+| --- | --- | --- | --- | --- |
+| Contact: 3a handle / 3b pitcher / 5 button / 7 cup & scale | short side **1%** | 8 px | 9 px | 11 px |
+| Pointing: 6 clock | short side **5%** | 40 px | 45 px | 55 px |
+
+Contact keeps only 1% for line width and antialiasing — touching means touching, a 10 px gap is not touching. Pointing is looser because the clock hangs on the wall and the tentacle crosses the whole frame; whether the direction is right matters more here than whether it is touching.
+
+Calibrated on the contested values measured in the previous run (raw measurements in [results/BLIND.md](results/BLIND.md)):
+
+| Measured | Canvas | Tip to clock face | Tolerance | Verdict |
+| --- | --- | --- | --- | --- |
+| ZCode | 1600×1100 | 45 px (axis off by 1.8 px) | 55 px | pass |
+| WorkBuddy | 1200×800 | 40 px, bridged by a purple dashed line | 40 px | **fail** — distance just fits, but it violates item 6's prohibition |
+| Claude | 1200×900 | 80 px | 45 px | fail |
+
+### Rubric versions
+
+| Version | Items | Basis |
+| --- | --- | --- |
+| [v1](rubric/v1.md) | 10 | The published scores use a 4-category weighting (5 + 2 + 2 + 1), **not** the checklist sum; the checklist also missed pitcher grip and tentacle overlap |
+| **v2 (current)** | 11 | 1 point per item, 11 total; tolerances are fixed numbers |
+
+The published 9.5 / 9.4 / 9.2 / 8.3 / 7.8 were scored with **v1** and cannot be reproduced with v2. Comparing across versions requires re-scoring with v2.
 
 **Principle**: a pretty drawing does not earn points. Gorgeous artwork with only six tentacles, or milk pouring outside the cup, still loses points.
 
@@ -114,6 +115,8 @@ Open [index.html](index.html) in a browser for the gallery — static, no build 
 ```
 prompt.md                The prompt, v2 — copy and paste
 prompts/v1.md            Frozen v1, the version this run used
+rubric/v1.md             Frozen rubric v1, what the published scores used
+rubric/v2.md             Current rubric v2 (11 items), hand this to a blind evaluator
 README.en.md             English
 CONTRIBUTING.md          Submission requirements and blind review method
 results/*.svg            Each agent tool's output (the only artefact that is scored)
