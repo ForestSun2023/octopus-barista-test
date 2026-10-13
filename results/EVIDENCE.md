@@ -54,4 +54,4 @@
 
 ## 怎么再来一次，且这次是盲的
 
-见 [../CONTRIBUTING.md](../CONTRIBUTING.md) 的「盲评复核」一节。
+方法见 [../CONTRIBUTING.md](../CONTRIBUTING.md) 的「盲评复核」一节，实际做出来的一轮见 [BLIND.md](BLIND.md)。

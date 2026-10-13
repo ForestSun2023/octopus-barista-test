@@ -106,6 +106,8 @@ node scripts/check-svg.mjs
 
 完整点评与各分项依据见 [results/SCORES.md](results/SCORES.md)；运行环境、产物规模与已知缺口见 [results/MANIFEST.md](results/MANIFEST.md)。
 
+盲评复核（匿名成 A–E、评审者不知道映射）结果见 [results/BLIND.md](results/BLIND.md)——**五份全部 10/10**，这张检查表在这批作品上已经饱和，排不出名次。
+
 画廊预览：用浏览器打开 [index.html](index.html) 即可，纯静态、无需构建，也可以直接开 GitHub Pages。
 
 ## 仓库结构
@@ -119,6 +121,7 @@ results/*.svg            各 Agent 的最终作品（也是唯一被评分的产
 results/MANIFEST.md      运行记录：环境、产物规模、已知缺口
 results/SCORES.md        本轮评分依据与逐份点评
 results/EVIDENCE.md      逐项判定证据与复核发现
+results/BLIND.md         盲评复核结果与排名对比
 scripts/check-svg.mjs    自包含性校验，CI 与投稿前都跑它
 scripts/render.mjs       SVG 渲染成 PNG，做预览图用
 scripts/<agent>/         各 Agent 生成作品时留下的脚本，仅供参考
